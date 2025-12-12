@@ -156,7 +156,7 @@ The project is actively evolving, and major features are planned.
 - Bell State example
 - Unit tests for correctness
 ---
-## 🗺️ Roadmap
+##  Roadmap
 
 - [ ] General multi-qubit CNOT support
 - [ ] Additional gates (Y, Phase, Rotation gates)
