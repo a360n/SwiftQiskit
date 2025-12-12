@@ -1,60 +1,162 @@
 # SwiftQiskit 
 
-**SwiftQiskit** is an open-source, GUI-first Quantum Computing SDK written in pure Swift, inspired by IBM's Qiskit.
+**SwiftQiskit** is a lightweight **quantum computing simulator** written entirely in **Swift**.  
+It brings a **Qiskit-like experience** to the Apple ecosystem, with a strong focus on **clarity**, **correctness**, and **future GUI integration**.
 
-Unlike traditional quantum frameworks that rely on CLI tools and notebooks, SwiftQiskit focuses on **visual interaction**, **native SwiftUI integration**, and **developer-friendly APIs** for Apple platforms.
-
----
-
-## ✨ Key Goals
-
-- Provide a **pure Swift** quantum circuit simulator
-- Offer a **visual-first (GUI)** quantum computing experience
-- Make quantum concepts more accessible for students and developers
-- Enable iOS / macOS quantum education apps
+>  This project is **experimental and educational**, but grounded in real quantum mechanics principles.
 
 ---
 
-##  Project Scope (v1.0)
+##  Features
 
-- Statevector-based quantum simulation
-- Core quantum gates (H, X, Z, CNOT)
-- Simple quantum circuit API
-- Measurement and probability visualization
-- Native SwiftUI GUI components
-
->  This project is a simulator, not a real quantum hardware backend.
-
----
-
-##  Inspired By
-
-- IBM Qiskit (Python)
-- Quantum Computing Textbook
-- Visual quantum circuit composers
+- ✅ Complex number arithmetic  
+- ✅ Matrix operations (including Kronecker products)  
+- ✅ State vector simulation  
+- ✅ Quantum gates:
+  - Hadamard (H)
+  - Pauli-X (X)
+  - Pauli-Z (Z)
+  - CNOT (Controlled-NOT)
+- ✅ Single-qubit gate embedding  
+- ✅ Quantum circuit abstraction  
+- ✅ Measurement & state collapse  
+- ✅ Bell State (Entanglement) example  
 
 ---
 
-##  Current Status
+##  Project Structure
 
- **Project initialized**  
-This repository is under active development.  
-Core implementation will be added incrementally with frequent commits.
+```text
+SwiftQiskit/
+├── Sources/
+│   └── SwiftQiskitCore/
+│       ├── Math/
+│       │   ├── Complex.swift
+│       │   └── Matrix.swift
+│       ├── Quantum/
+│       │   └── StateVector.swift
+│       ├── Gates/
+│       │   ├── Hadamard.swift
+│       │   ├── PauliX.swift
+│       │   ├── PauliZ.swift
+│       │   └── CNOT.swift
+│       └── Circuit/
+│           └── QuantumCircuit.swift
+├── Examples/
+│   └── main.swift
+└── Package.swift
+````
 
 ---
 
-##  Roadmap (Short)
+##  Getting Started
 
-- [ ] Core math (Complex numbers, matrices)
-- [ ] Quantum state representation
-- [ ] Basic quantum gates
-- [ ] Circuit model
-- [ ] GUI canvas (SwiftUI)
-- [ ] Example app
+### Requirements
+
+* Swift **5.9+**
+* macOS **13+**
+  *(iOS 16+ planned for future UI integration)*
+
+---
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/a360n/SwiftQiskit.git
+cd SwiftQiskit
+```
+
+### Run the Bell State Example
+
+```bash
+swift run SwiftQiskitExamples
+```
+
+---
+
+## 🔗 Bell State Example (Entanglement)
+
+The Bell state **|Φ⁺⟩** is defined as:
+
+```
+|Φ⁺⟩ = (|00⟩ + |11⟩) / √2
+```
+
+### Code Example
+
+```swift
+import SwiftQiskitCore
+
+let circuit = QuantumCircuit(qubits: 2)
+
+circuit.h(0)
+circuit.apply(CNOTGate.matrix)
+
+let finalState = circuit.run()
+print(finalState)
+
+for _ in 0..<10 {
+    let result = circuit.runAndMeasure()
+    print(result)
+}
+```
+
+### Expected Measurement Output
+
+```text
+00
+11
+00
+11
+11
+00
+```
+
+>  States **01** and **10** never appear —
+> this confirms **quantum entanglement**.
+
+---
+
+##  Design Philosophy
+
+* No hidden magic — everything is **explicit and readable**
+* Mathematical correctness over shortcuts
+* Modular architecture (**Core / Examples / GUI-ready**)
+* Designed for **learning**, **experimentation**, and **extension**
+
+---
+
+##  Roadmap
+
+* ⏳ Pauli-Y and Phase gates
+* ⏳ Controlled single-qubit gates
+* ⏳ Multi-qubit gate routing
+* ⏳ Quantum algorithms (Grover, Deutsch–Jozsa)
+* ⏳ SwiftUI Circuit Builder (GUI)
+* ⏳ Quantum state visualization
+* ⏳ XCTest-based validation
+
+---
+
+##  Contributing
+
+Contributions, ideas, and discussions are welcome.
+This project is built **step by step** and open for exploration.
 
 ---
 
 ##  License
 
-MIT License (to be added)
+**MIT License** © 2025 **Ali Nasser**
+
+---
+
+##  Final Note
+
+**SwiftQiskit** is not just a simulator —
+it’s an attempt to make **quantum computing accessible, visual, and native** on Apple platforms.
+
+Enjoy exploring the quantum world 
+
+```
 
