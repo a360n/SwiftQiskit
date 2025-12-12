@@ -158,5 +158,5 @@ it’s an attempt to make **quantum computing accessible, visual, and native** o
 
 Enjoy exploring the quantum world 
 
-```
+
 
