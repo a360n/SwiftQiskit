@@ -11,20 +11,21 @@ let package = Package(
         .library(
             name: "SwiftQiskit",
             targets: ["SwiftQiskitCore"]
+        ),
+        .executable(
+            name: "SwiftQiskitExamples",
+            targets: ["SwiftQiskitExamples"]
         )
     ],
     targets: [
-        // Core quantum logic (math, statevector, gates, simulator)
         .target(
             name: "SwiftQiskitCore",
             path: "Sources/SwiftQiskitCore"
         ),
-
-        // Unit tests for the core
-        .testTarget(
-            name: "SwiftQiskitCoreTests",
+        .executableTarget(
+            name: "SwiftQiskitExamples",
             dependencies: ["SwiftQiskitCore"],
-            path: "Tests/SwiftQiskitCoreTests"
+            path: "Examples"
         )
     ]
 )
