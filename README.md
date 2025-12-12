@@ -100,6 +100,7 @@ for _ in 0..<10 {
     print(result)
 }
 ```
+> Note: The core module is currently imported as `SwiftQiskitCore`.
 
 ### Expected Measurement Output
 
@@ -114,6 +115,7 @@ for _ in 0..<10 {
 
 >  States **01** and **10** never appear —
 > this confirms **quantum entanglement**.
+> Measurement outputs are probabilistic and may vary per run.
 
 ---
 
@@ -124,17 +126,6 @@ for _ in 0..<10 {
 * Modular architecture (**Core / Examples / GUI-ready**)
 * Designed for **learning**, **experimentation**, and **extension**
 
----
-
-##  Roadmap
-
-* ⏳ Pauli-Y and Phase gates
-* ⏳ Controlled single-qubit gates
-* ⏳ Multi-qubit gate routing
-* ⏳ Quantum algorithms (Grover, Deutsch–Jozsa)
-* ⏳ SwiftUI Circuit Builder (GUI)
-* ⏳ Quantum state visualization
-* ⏳ XCTest-based validation
 
 ---
 
@@ -142,6 +133,37 @@ for _ in 0..<10 {
 
 Contributions, ideas, and discussions are welcome.
 This project is built **step by step** and open for exploration.
+
+---
+##  Project Status
+
+ **SwiftQiskit is currently in an early experimental stage (v0.1).**
+
+- Core quantum simulation is implemented
+- API is subject to change
+- Performance is not yet optimized
+- GUI tools are optional and under development
+
+The project is actively evolving, and major features are planned.
+---
+## ✅ What Works (v0.1)
+
+- QuantumCircuit abstraction
+- Single-qubit gates: H, X, Z
+- Two-qubit entanglement (CNOT – limited v0.1)
+- StateVector simulation
+- Measurement with shots & counts
+- Bell State example
+- Unit tests for correctness
+---
+## 🗺️ Roadmap
+
+- [ ] General multi-qubit CNOT support
+- [ ] Additional gates (Y, Phase, Rotation gates)
+- [ ] Circuit visualization (ASCII / SwiftUI)
+- [ ] Noise models
+- [ ] Performance optimizations
+- [ ] Stable public API (v1.0)
 
 ---
 
@@ -157,6 +179,3 @@ This project is built **step by step** and open for exploration.
 it’s an attempt to make **quantum computing accessible, visual, and native** on Apple platforms.
 
 Enjoy exploring the quantum world 
-
-
-
