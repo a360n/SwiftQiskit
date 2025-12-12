@@ -6,9 +6,7 @@
 //
 //  Created by Ali on 2025-01-XX.
 //
-
 import Foundation
-
 // MARK: - QuantumCircuit
 public final class QuantumCircuit {
 
@@ -40,6 +38,22 @@ public final class QuantumCircuit {
     }
 
     // MARK: - Execution
+    /// Measure the circuit multiple times and return counts
+    public func measure(shots: Int) -> SimulationResult {
+        precondition(shots > 0, "Number of shots must be positive")
+
+        var counts: [String: Int] = [:]
+
+        for _ in 0..<shots {
+            let result = runAndMeasure()
+            let binary = String(result, radix: 2)
+                .leftPadding(toLength: qubits, withPad: "0")
+
+            counts[binary, default: 0] += 1
+        }
+
+        return SimulationResult(shots: shots, counts: counts)
+    }
 
     /// Run the circuit and return the final state
     public func run() -> StateVector {
@@ -56,9 +70,15 @@ public final class QuantumCircuit {
         return state.measure()
     }
 }
-
 // MARK: - Single-Qubit Gates
 public extension QuantumCircuit {
+    /// Apply CNOT gate (control -> target)
+    func cx(_ control: Int, _ target: Int) {
+        precondition(qubits == 2, "cx currently supports only 2-qubit circuits")
+        precondition(control == 0 && target == 1, "Only cx(0,1) supported in v0.1")
+
+        apply(CNOTGate.matrix)
+    }
 
     /// Apply Hadamard gate to a specific qubit
     func h(_ qubit: Int) {
@@ -79,10 +99,18 @@ public extension QuantumCircuit {
         )
         apply(full)
     }
+    /// Apply Pauli-Z gate to a specific qubit
+    func z(_ qubit: Int) {
+        let full = embedSingleQubitGate(
+            PauliZGate.matrix,
+            qubits: qubits,
+            target: qubit
+        )
+        apply(full)
+    }
+
 }
-
 // MARK: - Kronecker Utilities (file-private)
-
 private func kron(_ a: Matrix, _ b: Matrix) -> Matrix {
     var result = Matrix(rows: a.rows * b.rows, cols: a.cols * b.cols)
     for i in 0..<a.rows {
@@ -96,11 +124,9 @@ private func kron(_ a: Matrix, _ b: Matrix) -> Matrix {
     }
     return result
 }
-
 private func identity(_ size: Int) -> Matrix {
     Matrix.identity(size: size)
 }
-
 /// Embed a single-qubit gate into an n-qubit system at a specific qubit index.
 /// Qubit indexing: 0 = most-significant (leftmost)
 private func embedSingleQubitGate(

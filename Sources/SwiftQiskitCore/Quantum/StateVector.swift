@@ -108,3 +108,12 @@ extension StateVector: CustomStringConvertible {
             .joined(separator: "\n")
     }
 }
+// MARK: - Accessing Amplitudes
+public extension StateVector {
+
+    /// Access amplitude by basis index (e.g. |00⟩ = 0, |01⟩ = 1)
+    subscript(index: Int) -> Complex {
+        precondition(index >= 0 && index < amplitudes.count, "State index out of range")
+        return amplitudes[index]
+    }
+}
